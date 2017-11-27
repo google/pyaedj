@@ -1,0 +1,7 @@
+Django==1.11.7
+Flask==0.12.2
+google-api-python-client==1.4.0
+pyaml==17.8.0
+pylint==1.7.4
+webapp2==3.0.0b1
+WebOb==1.7.3

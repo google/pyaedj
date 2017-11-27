@@ -1,0 +1,4 @@
+*.pyc
+
+platform/modules/web/static/
+platform/lib/
