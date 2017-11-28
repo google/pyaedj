@@ -23,10 +23,9 @@ import base64
 from contextlib import contextmanager
 from datetime import datetime
 from functools import wraps
-import json
-import unittest
 from common import dao
 import config
+from django import test
 from google.appengine.ext import deferred
 from google.appengine.ext import testbed
 
@@ -117,10 +116,11 @@ def ephimeral(f):
   return wrapped
 
 
-class BaseTestCases(unittest.TestCase):
-  """Base test class."""
+class BaseTestCase(test.TestCase):
+  """Base test class for App Engine."""
 
   def setUp(self):
+    super(BaseTestCase, self).setUp()
     dao.EphimeralStorageProvider._clear()  # pylint: disable=protected-access
     self.testbed = testbed.Testbed()
     self.testbed.activate()
@@ -132,6 +132,21 @@ class BaseTestCases(unittest.TestCase):
   def tearDown(self):
     self.execute_all_deferred_tasks()
     self.testbed.deactivate()
+    super(BaseTestCase, self).tearDown()
+
+  def assertContains(self, response, text, **kwargs):
+    try:
+      super(BaseTestCase, self).assertContains(response, text, **kwargs)
+    except AssertionError as ae:
+      config.LOG.critical('Response:\n%s', response.content)
+      raise ae
+
+  def assertNotContains(self, response, text, **kwargs):
+    try:
+      super(BaseTestCase, self).assertNotContains(response, text, **kwargs)
+    except AssertionError as ae:
+      config.LOG.critical('Response:\n%s', response.content)
+      raise ae
 
   def execute_all_deferred_tasks(self, queue_name='default'):
     """Executes all pending deferred tasks."""

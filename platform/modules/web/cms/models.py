@@ -25,6 +25,11 @@ from django.db import models
 MAX_CHAR_LEN = 255
 
 
+class UserVisibleBusinessRuleViolation(Exception):
+  """Exception visible to a user."""
+  pass
+
+
 def new_random_key():
   return uuid.uuid4().int
 

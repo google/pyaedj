@@ -22,7 +22,7 @@ import os
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAIN_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+MAIN_TEMPLATES_DIR = os.path.join(BASE_DIR, '..', 'cms', 'templates')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False

@@ -1,0 +1,20 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block bodyclass %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block content %}{% endblock %}
+{% block pretitle %}{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block content_title %}
+<h1>{{ error_type }} Occurred</h1>
+{% if is_intermittent %}
+  <p>This is a known <b>temporary</b> database connectivity error.</p>
+  <p>Please retry your last action once or twice before escalating.</p>
+{% endif %}
+<p>{{ error_details }}</p>
+<p>
+  Please contact us if errors continue and you are unable to proceed.
+</p>
+{% endblock %}

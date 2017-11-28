@@ -20,8 +20,10 @@ __author__ = 'Pavel Simakov (psimakov@google.com)'
 
 from django.conf import urls
 from django.contrib import admin
-
+from modules.web.cms import admin as cms_admin
 
 urlpatterns = [
     urls.url(r'', urls.include(admin.site.urls)),
 ]
+
+handler500 = cms_admin.server_error

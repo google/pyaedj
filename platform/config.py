@@ -44,7 +44,7 @@ if IS_APP_ENGINE_STANDADR_PROD:
 
 # select proper config
 _DEFAULT_ENV = {
-    'project_id': 'gaedj-staging',
+    'project_id': 'py-ae-dj',
     'sprint': '1',
 }
 

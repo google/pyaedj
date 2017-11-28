@@ -19,10 +19,34 @@
 __author__ = 'Pavel Simakov (psimakov@google.com)'
 
 
+import sys
+from django import shortcuts
 from django.contrib import admin
+from django.db import utils
 from modules.web.cms import models
 
 APP_NAME = 'cms'
+
+
+def server_error(request):
+  """Renders custom 500 error page."""
+  error_type = 'An Unknown Error'
+  error_details = ''
+  is_intermittent = False
+  _, error, _ = sys.exc_info()
+  if error:
+    if isinstance(error, models.UserVisibleBusinessRuleViolation):
+      error_type = 'A Business Rule Violation'
+      error_details = str(error)
+      is_intermittent = False
+    elif isinstance(error, utils.DatabaseError):
+      error_type = 'A Database Error'
+      is_intermittent = True
+    else:
+      error_type = 'An Unexpected Error'
+  return shortcuts.render(request, 'admin/500.html', {
+      'error_type': error_type, 'error_details': error_details,
+      'is_intermittent': is_intermittent})
 
 
 class CustomAdminSite(admin.AdminSite):

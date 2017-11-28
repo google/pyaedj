@@ -2,14 +2,19 @@ service: default
 runtime: python27
 api_version: 1
 threadsafe: false
+
 env_variables:
-  DJANGO_SETTINGS_MODULE: 'modules.web.settings.dev'
+  DJANGO_SETTINGS_MODULE: 'modules.web.settings.production'
   GAE_USE_SOCKETS_HTTPLIB: 'anyvalue'
+
 handlers:
 - url: /static
   static_dir: modules/web/static/
 - url: /.*
   script: web_main.application
+
 libraries:
 - name: ssl
   version: 2.7.11
+- name: MySQLdb
+  version: 1.2.5

@@ -23,7 +23,7 @@ from common import testing
 import config
 
 
-class EnvTestCases(testing.BaseTestCases):
+class EnvTestCases(testing.BaseTestCase):
   """Tests ENV."""
 
   def test_default(self):
@@ -39,7 +39,7 @@ class EnvTestCases(testing.BaseTestCases):
     config.remove_env_override('some_unset_property')
 
 
-class DAOTestCases(testing.BaseTestCases):
+class DAOTestCases(testing.BaseTestCase):
   """Tests."""
 
   @testing.ephimeral

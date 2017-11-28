@@ -21,13 +21,17 @@ from base import *  # pylint: disable=wildcard-import
 __author__ = 'Pavel Simakov (psimakov@google.com)'
 
 
-# Setup connection to Google CLoud SQL.
+ALLOWED_HOSTS = [
+    'py-ae-dj.appspot.com',
+]
+
+# Setup connection to Google Cloud SQL.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # To access Cloud SQL from App Engine you must use the /cloudsql/*
         # endpoint, not the IP.
-        'HOST': '/cloudsql/gaedj-staging:gaedj-staging',
+        'HOST': '/cloudsql/py-ae-dj:us-central1:py-ae-dj-prod',
         'NAME': 'gaedj',
         'USER': 'root',
     },

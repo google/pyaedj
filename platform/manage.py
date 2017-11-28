@@ -17,49 +17,6 @@
 r"""Command Line Interface to Managing Various Platform Tasks.
 
 
-Initial Setup on Ubuntu 16.04 LTS
-  * Ru nan update:
-    > sudo apt-get update
-  * Install Python:
-    * do I need to do this step? not if this works:
-      > python --version
-    * run these commands:
-      > sudo apt-get install python2.7
-  * Install Google Cloud SDK (gcloud, gsutils); install with:
-    * do I need to do this step? not if this works:
-      > gcloud --version  # Google Cloud SDK 172.0.0
-      > gsutil --version  # gsutil version: 4.27
-    * run these commands:
-      > curl https://sdk.cloud.google.com | bash
-      > exec -l $SHELL
-      > gcloud init
-      > gcloud auth application-default login
-  * Install MySQL:
-    * do I need to do this step? not if this works:
-      > mysql --version
-    * run these commands:
-      > sudo apt-get install mysql-server
-      > sudo apt-get install libmysqlclient-dev
-    * create database:
-      > mysql -u root
-      > CREATE DATABASE IF NOT EXISTS `gaedj` \
-          CHARACTER SET utf8 COLLATE utf8_bin;
-  * Install pip:
-    * do I need to do this step? not if this works:
-      > pip --version
-    * run these commands:
-      > sudo apt-get install python-pip
-      > pip install --upgrade pip
-  * Insall global pip dependencies, which did not work in requirements.txt:
-    > sudo pip install MySQL-Python==1.2.5
-  * Install local pip dependencies via requirements.txt:
-    > python manage.py deps_install
-  * Start local server:
-    > python manage.py app_run
-  * Visit app home page:
-    > http://loalhost:8080
-
-
 Ongoing Administeration on Ubuntu 16.04 LTS
   * managing pip:
     > pip list
@@ -161,6 +118,10 @@ class UnitTests(cli.Command):
   DESC = 'Runs all unit tests.'
 
   def execute(self):
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'modules.web.settings.dev'
+    import django  # pylint: disable=g-import-not-at-top
+    django.setup()
+
     old_level = config.LOG.level
     config.LOG.level = logging.CRITICAL
     try:
@@ -178,6 +139,7 @@ def django_admin(args):
   from django.core import management  # pylint: disable=g-import-not-at-top
   os.environ['DJANGO_SETTINGS_MODULE'] = 'modules.web.settings.dev'
   management.execute_from_command_line(['manage.py'] + args)
+  del os.environ['DJANGO_SETTINGS_MODULE']
 
 
 class AppRun(cli.Command):
@@ -196,6 +158,7 @@ class AppRun(cli.Command):
         '--use_mtime_file_watcher=True '    # to allow code reload while running
         '--dev_appserver_log_level=debug '  # to see exception on the console
         '--log_level=debug '
+        '--env_var DJANGO_SETTINGS_MODULE=modules.web.settings.dev '
         'web_main.yaml'.format(userhome=os.path.expanduser('~')), live=True)
 
 

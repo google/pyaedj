@@ -52,6 +52,7 @@ SUPER_USER_EMAILS = set(['pavel.simakov@gmail.com'])
 
 # Setup allowed local hosts.
 ALLOWED_HOSTS = [
+    'testserver',
     'localhost',
     '127.0.0.1',
     '.localhost',
