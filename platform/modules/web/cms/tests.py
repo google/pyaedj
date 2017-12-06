@@ -18,7 +18,9 @@
 
 __author__ = 'Pavel Simakov (psimakov@google.com)'
 
+
 from common import testing
+import config
 
 
 class CMSTestCases(testing.BaseTestCase):
@@ -38,3 +40,20 @@ class CMSTestCases(testing.BaseTestCase):
         response,
         '<h1 id="site-name"><a href="/">Django on App Engine</a></h1>')
     self.assertContains(response, '<h1>Cms administration</h1>')
+
+
+class RESTTestCases(testing.BaseTestCase):
+  """Tests."""
+
+  def test_untrusted_project_request_fails(self):
+    response = self.client.get(
+        '/api/v1/ping',
+        **{'HTTP_X_APPENGINE_INBOUND_APPID': 'some-other-app'})
+    self.assertEquals(403, response.status_code)
+
+  def test_trusted_project_request_ok(self):
+    for project_id in [None, config.ENV.project_id]:
+      response = self.client.get(
+          '/api/v1/ping',
+          **{'HTTP_X_APPENGINE_INBOUND_APPID': project_id})
+      self.assertEquals(200, response.status_code)

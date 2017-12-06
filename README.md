@@ -53,7 +53,7 @@ py-ae-dj is Licensed under the Apache License, Version 2.0.
       * > pip install --upgrade pip
   * Install global pip dependencies, which did not work in requirements.txt:
     * > sudo pip install MySQL-Python==1.2.5
-  * Get this project from Github:
+  * Get this project from GitHub:
     * > git clone https://github.com/google/pyaedj.git
     * > cd pyaedj/platform
   * Install local pip dependencies via requirements.txt:
@@ -75,4 +75,8 @@ py-ae-dj is Licensed under the Apache License, Version 2.0.
     * character set: utf8
     * collation: utf8_bin
 
-
+## Common management tasks (TBD)
+  * run unit tests
+  * copy localhost database to production
+  * deploy copy of code to production
+  * copy production database to localhost

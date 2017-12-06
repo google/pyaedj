@@ -14,20 +14,17 @@
 # limitations under the License.
 #
 
-"""Django Url Configuration."""
+"""Endpoints for google_auth."""
 
-__author__ = 'Pavel Simakov (psimakov@google.com)'
+__author__ = 'John Cox (johncox@google.com)'
 
-from common import rest
-from django.conf import urls
-from django.contrib import admin
-from modules.web.cms import admin as cms_admin
 
-urlpatterns = [
-    # REST API
-    urls.url(r'^api/v1/ping', rest.PingHandler.as_view()),
-    # Admin App
-    urls.url(r'', urls.include(admin.site.urls)),
-]
+from django import shortcuts
+from django.contrib import auth
 
-handler500 = cms_admin.server_error
+from modules.auth import users
+
+
+def logout(request):
+  auth.logout(request)
+  return shortcuts.redirect(users.create_logout_url('/'))

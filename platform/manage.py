@@ -17,7 +17,7 @@
 r"""Command Line Interface to Managing Various Platform Tasks.
 
 
-Ongoing Administeration on Ubuntu 16.04 LTS
+Ongoing Administration tasks on Ubuntu 16.04 LTS
   * managing pip:
     > pip list
     > pip show MySQL-Python
@@ -35,6 +35,8 @@ Good Luck!
 
 __author__ = 'Pavel Simakov (psimakov@google.com)'
 
+# TODO(psimakov): complete and test Google Identity bridge to Django user
+# TODO(psimakov): need tests for modules.django.*
 
 import logging
 import os
@@ -113,8 +115,8 @@ class DepsUnInstall(cli.Command):
     self.shell('rm -rf ./lib')
 
 
-class UnitTests(cli.Command):
-  NAME = 'unit_tests'
+class TestRun(cli.Command):
+  NAME = 'test_run'
   DESC = 'Runs all unit tests.'
 
   def execute(self):
@@ -170,7 +172,7 @@ class WebDeploy(cli.Command):
   PYTHON_TASK = True
 
   def execute(self):
-    UnitTests().execute()
+    TestsRun().execute()
     _deploy_service(self, 'web')
 
 
@@ -200,7 +202,7 @@ cli.Command.register(DepsInstall)
 cli.Command.register(DepsUnInstall)
 cli.Command.register(MigrationsApply)
 cli.Command.register(MigrationsMake)
-cli.Command.register(UnitTests)
+cli.Command.register(TestRun)
 cli.Command.register(WebDeploy)
 
 
