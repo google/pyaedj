@@ -1,0 +1,313 @@
+/**
+ * Themes: https://getmdl.io/customize/index.html
+ */
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+  background-color: inherit
+}
+
+.a120-navbar-actions {
+  background: #f8f8f8;
+}
+
+
+body.a120-theme .navbar-nav>li>a,
+body.a120-theme .navbar-nav>li>a:focus,
+body.a120-theme .navbar-nav>li>a:hover,
+body.a120-theme .a120-user-bar {
+  background: var(--a120-nav-bg-color);
+  color: var(--a120-nav-text-color);
+}
+
+body.a120-theme .a120-user-bar,
+body.a120-theme .a120-user-bar .caret {
+  color: var(--a120-nav-text-color);
+}
+
+body.a120-theme .a120-user-bar .icon-bar {
+  background: var(--a120-nav-text-color);
+}
+
+body.a120-theme .btn-primary {
+  background: var(--a120-btn-bg-color);
+  border: solid 1px var(--a120-btn-bg-color);
+  color: var(--a120-btn-text-color);
+}
+
+body.a120-theme .navbar-nav>.active>a,
+body.a120-theme .navbar-nav>.active>a:focus,
+body.a120-theme .navbar-nav>.active>a:hover {
+  background: var(--a120-nav-active-bg-color);
+  color: inherit;
+}
+
+/* Blue */
+body.a120-theme-blue {
+  --a120-nav-active-bg-color: rgb(48, 63, 159);
+  --a120-nav-bg-color: rgb(63, 81, 181);
+  --a120-nav-text-color: rgb(255, 255, 255);
+  --a120-btn-bg-color: rgb(255, 64, 129);
+  --a120-btn-text-color: rgb(255, 255, 255);
+}
+
+/* Lilac */
+body.a120-theme-lilac {
+  --a120-nav-active-bg-color: rgb(123, 31, 162);
+  --a120-nav-bg-color: rgb(156, 39, 176);
+  --a120-nav-text-color: rgb(255, 255, 255);
+  --a120-btn-bg-color: rgb(255, 171, 64);
+  --a120-btn-text-color: rgb(66, 66, 66);
+}
+
+/* Green */
+body.a120-theme-green {
+  --a120-nav-active-bg-color: rgb(0, 121, 107);
+  --a120-nav-bg-color: rgb(0, 150, 136);
+  --a120-nav-text-color: rgb(255, 255, 255);
+  --a120-btn-bg-color: rgb(255,82,82);
+  --a120-btn-text-color: rgb(255, 255, 255);
+}
+
+
+/**
+ * Alter core Bootstrap styles.
+ */
+
+.a120-view-container .container-fluid,
+.a120-view-container .row {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.a120-view-container input[type=checkbox] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+  position: relative;
+  margin: 4px;
+  margin-right: 32px;
+}
+
+
+/**
+ * Navbar.
+ */
+
+.a120-user-bar .navbar-header {
+  margin: 0px;
+}
+
+.a120-user-bar .navbar-toggle {
+  margin-right: 0px;
+}
+
+.a120-user-bar .navbar h3, a.navbar-brand {
+  font-family: Arial;
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+}
+
+.a120-user-bar a.navbar-brand,
+.a120-user-bar a.navbar-brand:visited {
+  color: inherit;
+}
+
+
+/**
+ * Add new styles.
+ */
+.a120-clear {
+  clear: both;
+}
+
+.a120-loading {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  top: 64px;
+}
+
+.a120-loading .alert {
+  padding: 0px;
+}
+
+.a120-flash-message {
+  width: 164px;
+  position: fixed;
+  left: 32px;
+  bottom: 64px;
+  max-height: 82px;
+  overflow: scroll;
+}
+
+.a120-flash-message-content {
+  opacity: 0.7;
+  color: #fff;
+  background: #000;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.a120-signin-form  h3 {
+  margin: 20px 10px;
+}
+
+.a120-signin-form nav {
+  margin-bottom: 64px;
+}
+
+.a120-login-btn button {
+  border-radius: 5px;
+  padding: 8px 16px;
+  background: #eee;
+}
+
+.a120-sign-out {
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.a120-goog-logo {
+  margin-right: 16px;
+  width: 24px;
+  height: 24px;
+}
+
+.a120-user-bar {
+  padding: 0px 12px;
+}
+
+.a120-user-info {
+  margin-top: 6px;
+}
+
+ul.a120-user-info>li>a {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+img.a120-user-photo {
+  margin: 0px 8px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.a120-member-container {
+  padding: 24px 0px;
+  border-bottom: solid 1px #eee;
+}
+
+.a120-member-container-private {
+  background: #eee;
+}
+
+img.a120-member-photo {
+  max-height: 128px;
+  border-radius: 8px;
+  transition: transform .2s;
+  margin: 12px;
+}
+
+img.a120-member-photo:hover {
+  transform: scale(1.05);
+}
+
+.a120-member-name {
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.a120-home-container {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.a120-consent-tos {
+  text-align: justify;
+}
+
+.a120-footer {
+  min-height: 0px;
+  border-radius: 0px;
+  z-index: 999;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 8px;
+  margin: 0px;
+  font-size: 90%;
+  color: #404040;
+}
+
+.a120-footer a {
+  color: #000;
+}
+
+
+/**
+ * Tab styles.
+ */
+
+.a120-btn-glyph {
+  color: #ccc;
+  cursor: pointer;
+  margin: 0px 8px;
+  padding-top: 4px;
+}
+
+.a120-post-container .a120-btn-glyph {
+  color: #ccc;
+  cursor: pointer;
+  margin: 0px 8px;
+  padding-top: 4px;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.a120-post-container .a120-vote-active {
+  background: var(--a120-nav-bg-color);
+  color: var(--a120-nav-text-color);
+}
+
+.a120-votes-total {
+  min-width: 36px;
+}
+
+.a120-tab-main-btn {
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 12px;
+}
+
+.a120-profile-photo {
+  max-height: 164px;
+  vertical-align: top;
+}
+
+.a120-btn-cancel,
+.a120-btn-save {
+  margin: 0px 24px;
+}
+
+.a120-votes-total {
+  font-weight: bold;
+  padding: 2px 8px;
+  border: solid 1px #eee;
+}
+
+.a120-tab-home .jumbotron p {
+  font-size: 18px;
+}
+
+.a120-tags label {
+  font-weight: 400;
+}

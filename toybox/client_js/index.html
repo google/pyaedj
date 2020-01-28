@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToyBox In Action</title>
+  <link rel="icon" href="https://area120.google.com/static/images/favicon.ico">
+  <link rel="stylesheet" href="https://a120-cdn.appspot.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://a120-cdn.appspot.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="js/bundle.js"></script>
+</head>
+<body>
+  <!-- loading indicator; visible to all -->
+  <div class="container-fluid a120-loading">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="alert alert-warning text-center a120-loading-content">
+          loading application
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- container for all views -->
+  <div class="a120-view-container"></div>
+
+  <!-- flash message -->
+  <div class="a120-flash-message" style="display: none;">
+    <div class="pull-left a120-flash-message-content"></div>
+  </div>
+
+  <!-- page footer; visible to all -->
+  <nav class="navbar navbar-default text-center a120-footer">
+    <div style="float: right;">
+      <div style="width: 32px; height: 32px;">
+        <img class="a120-loading-img" style="width: 32px;" src="img/loading.svg">
+      </div>
+    </div>
+
+    <a href="mailto:a120-pwa@google.com">Contact us</a>
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    <a href='https://policies.google.com/privacy?hl=en&gl=us'
+       target='_blank'>Privacy policy</a>
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    <a href='https://policies.google.com/terms?gl=US&hl=en'
+       target='_blank'>Terms of service</a>
+    <br>
+    TODO: © Company XYZ
+
+  </nav>
+
+
+  <!-- container for HTML templates -->
+  <div class="a120-templates" style="display: none;">
+
+
+    <!-- Sign in panel, visible if no user is in session. //-->
+    <div class="loginPanel">
+      <div class="text-center a120-signin-form">
+        <nav class="navbar navbar-default">
+            <h3>ToyBox In Action</h3>
+        </nav>
+        <p>Sign in with your Google account to learn more.</p>
+        <div class="a120-login-btn">
+          <button>
+            <img class="a120-goog-logo"
+                src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png">
+            SIGN IN WITH GOOGLE
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Access denied panel, visible to signed in user who has no rights to access. -->
+    <div class="accessDeniedPanel">
+      <div class="text-center a120-signin-form">
+        <nav class="navbar navbar-default">
+            <h3>ToyBox In Action</h3>
+        </nav>
+        <p>You are currently signed in as <b><span class="a120-email"></span></b>.</p>
+        <p class="a120-message"></p>
+        <p>Please <a class='a120-sign-out'>Sign Out</a> and try a different account.</p>
+      </div>
+    </div>
+
+
+    <!-- Page header navbar panel, visible to a signed in user. -->
+    <div class="userHomePage">
+      <div class="a120-home-page">
+        <nav class="navbar navbar-default navbar-fixed-top a120-user-bar">
+          <div class="container-fluid">
+
+            <div class="pull-right a120-user-info">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-haspopup="true" aria-expanded="false">
+                <img class="a120-user-photo"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="a120-action-sign-out">Sign Out</a></li>
+              </ul>
+            </div>
+
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed pull-left" aria-expanded="false"
+                  data-toggle="collapse" data-target="#a120-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/#home">ToyBox In Action</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="a120-navbar-collapse">
+              <ul class="nav navbar-nav navbar-center a120-navbar-actions">
+                <!-- menu is dynamically populated -->
+              </ul>
+            </div>
+
+          </div>
+        </nav>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 a120-home-container">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- User Consent Screen -->
+    <div class="userConsent">
+      <div class="a120-user-consent-form">
+        <h2 class="text-center">Registration</h2>
+
+        <p>
+          TODO: This is a product by Company XYZ.
+          Please fill out the following form
+          so we can confirm your eligibility.</p>
+
+        <hr>
+
+        <h3>User Information</h3>
+
+        <p>
+          You are signed in as <b>
+          <span class="a120-consent-email"></span></b>.
+          By providing your email address you agree to receive email communications
+          from us.
+        </p>
+
+        <p>You have to be at least 18 years old to use this product.</p>
+
+        <div class="alert alert-warning checkbox" role="alert">
+          <label><input type="checkbox">
+            I am at least 18 years old.</label>
+        </div>
+
+        <hr>
+
+        <h3>User Agreement</h3>
+
+        <div class="a120-consent-tos">
+          TODO: Complete Company XYZ User Agreement
+        </div>
+
+        <div class="alert alert-warning checkbox" role="alert">
+          <label><input type="checkbox">
+            I accept the terms of the user agreement.</label>
+        </div>
+
+        <div class="alert alert-danger checkbox a120-consent-status" role="alert"></div>
+
+        <p class="text-center"><a class="btn btn-primary a120-consent-submit" href="#">
+          Agree &amp; Register</a></p>
+      </div>
+    </div>
+
+
+    <!--  Members tab. -->
+    <div class="tabMembers">
+      <div class="a120-tab-members">
+        <h3>All Members</h3>
+        <p style="color: #ccc;"><i>showing only members who choose to be listed</i></p>
+
+        <hr class="a120-clear">
+      </div>
+    </div>
+
+
+    <!-- Posts tab. -->
+    <div class="tabPosts">
+      <div class="a120-tab-posts">
+        <h3 class="pull-left">All Posts</h3>
+        <a class="btn btn-primary a120-tab-main-btn a120-btn-new-post">New Post</a>
+
+        <hr class="a120-clear">
+      </div>
+    </div>
+
+
+    <!-- Post panel. -->
+    <div class="panelPost">
+      <div class="a120-post-container">
+        <a class="pull-right a120-btn-glyph a120-btn-vote-down" title="Vote Down">
+          <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+        <span class="pull-right text-center a120-votes-total"></span>
+        <a class="pull-right a120-btn-glyph a120-btn-vote-up" title="Vote Up">
+          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+
+        <a class="pull-right a120-btn-glyph a120-btn-delete-post" title="Delete">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+
+        <p class="a120-post-content"></p>
+
+        <div class="alert alert-warning a120-post-action-status" role="alert"></div>
+      </div>
+    </div>
+
+
+    <!-- Home tab. -->
+    <div class="tabHome">
+      <div class="a120-tab-home">
+        <div class="jumbotron" style="margin: 64px 0px;">
+          <p>
+            <br>
+            Welcome to <a
+                style="color: inherit; font-weight: 700;"
+                href="https://g3doc.corp.google.com/company/area120/common/g3doc/sets/pwa.md">
+              ToyBox</a> -- a progressive web apps framework.
+            This demo app lets users register, post, and vote on messages.
+          </p>
+          <p>
+            Clone and <b style="font-weight: 500px;">modify this app</b> to create
+            your own new product in minutes. Good luck!
+          </p>
+
+          <br>
+
+          <p class="text-center">
+            <a class="btn btn-primary" href="#members" role="button">Members</a>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-primary" href="#posts" role="button">Posts</a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Member panel. -->
+    <div class="panelMember">
+      <div class="container-fluid a120-member-container">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <img class="a120-member-photo" data-toggle="tooltip">
+          </div>
+          <div class="col-md-8 a120-member-about">
+          </div>
+        </div>
+        <div class="a120-clear"></div>
+      </div>
+    </div>
+
+
+    <!-- Settings tab. -->
+    <div class="tabSettings">
+      <div class="a120-tab-settings">
+        <h3 class="pull-left">My User Profile</h3>
+        <a class="btn btn-primary a120-tab-main-btn a120-btn-edit-profile">Edit</a>
+
+        <hr class="a120-clear">
+
+        <p><b>Profile Visibility:</b>&nbsp;&nbsp;
+          <span class="a120-profile-visibility"></span></p>
+
+        <hr>
+
+        <p><b>Email:</b>&nbsp;&nbsp;
+          <span class="a120-profile-email"></span></p>
+        <p><b>Name:</b>&nbsp;&nbsp;
+          <span class="a120-profile-name"></span></p>
+        <p><b>Pronouns:</b>&nbsp;&nbsp;
+          <span class="a120-profile-pronouns"></span></p>
+        <p><b>Professional Title:</b>&nbsp;&nbsp;
+          <span class="a120-profile-title"></span></p>
+        <p><b>Home City:</b>&nbsp;&nbsp;
+          <span class="a120-profile-location"></span></p>
+        <p><b>About Me:</b>&nbsp;&nbsp;
+          <span class="a120-profile-about"></span></p>
+        <p><b>Photo:</b>&nbsp;&nbsp;
+          <img class="a120-profile-photo"></p>
+        <p><b>Tags:</b>&nbsp;&nbsp;
+          <span class="a120-profile-tags"></span></p>
+
+      </div>
+    </div>
+
+
+    <!-- New post form. -->
+    <div class="formNewPost">
+      <div class="a120-tab-settings">
+        <h3 class="pull-left">New Post</h3>
+
+        <hr class="a120-clear">
+
+        <div class="form-group">
+          <label>Content:</label>
+          <textarea class="form-control a120-post-content" rows="7"></textarea>
+          <span id="helpBlock" class="help-block">Plain text only; no markup.</span>
+        </div>
+
+        <hr>
+
+        <div class="alert alert-danger a120-save-status" role="alert"></div>
+
+        <p class="text-center">
+          <a class="btn btn-default a120-btn-cancel" title="Cancel">Cancel</a>
+          <a class="btn btn-primary a120-btn-save" title="Save">Publish New Post</a>
+        </p>
+      </div>
+    </div>
+
+
+    <!-- User profile form. -->
+    <div class="formUserProfile">
+      <div class="a120-tab-settings">
+        <h3 class="pull-left">Modify My Profile</h3>
+
+        <hr class="a120-clear">
+
+        <div class="form-group">
+          <label>My Profile Visibility:</label>
+          <select class="form-control a120-profile-visibility"></select>
+        </div>
+
+        <div class="form-group">
+          <label>My Pronouns:</label>
+          <input type="text" class="form-control a120-profile-pronouns"
+              placeholder="he/him, she/her, they/them">
+        </div>
+
+        <div class="form-group">
+          <label>My Professional Title:</label>
+          <input type="text" class="form-control a120-profile-title"
+              placeholder="Your Professional Title">
+        </div>
+
+        <div class="form-group">
+          <label>My Home City:</label>
+          <input type="text" class="form-control a120-profile-location"
+              placeholder="Your Home City">
+        </div>
+
+        <div class="form-group">
+          <label>About Me:</label>
+          <textarea class="form-control a120-profile-about" rows="7"></textarea>
+          <span id="helpBlock" class="help-block">Plain text only; no markup.</span>
+        </div>
+
+        <div class="form-group">
+          <label>Tags:</label>
+          <div class="a120-tags a120-profile-tags"></div>
+        </div>
+
+        <hr>
+
+        <div class="alert alert-danger a120-save-status" role="alert"></div>
+
+        <p class="text-center">
+          <a class="btn btn-default a120-btn-cancel" title="Cancel">Cancel</a>
+          <a class="btn btn-primary a120-btn-save" title="Save">Save Changes</a>
+        </p>
+
+      </div>
+    </div>
+
+
+    <!-- Admin tab. -->
+    <div class="tabAdmin">
+      <div class="a120-tab-admin">
+      </div>
+    </div>
+
+
+  </div>
+</body>
+</html>
