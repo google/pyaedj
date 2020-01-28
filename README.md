@@ -12,8 +12,8 @@ application with Google Cloud SQL, Google Cloud Datastore and other Google
 Cloud APIs.
 
 We have two versions:
-* **CURRENT** -- Python 3.7 API server with JavaScript responsive web app [link](./toybox/README.md)
-* **DEPRECATED** -- Python 2.7 server with server-side template rendering [link](https://github.com/google/pyaedj/blob/master/platform/README.md)
+* **CURRENT** -- Python 3.7 API server with JavaScript responsive web app [(link)](./toybox/README.md)
+* **DEPRECATED** -- Python 2.7 server with server-side template rendering [(link)](./platform/README.md)
 
 Good luck!
 
