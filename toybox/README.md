@@ -5,10 +5,15 @@
 ## Goals
 
 py-ae-dj is an experimental project helping developers use Python and Datastore
-on Google App Engine. It has minimal, but all nessesary tools for setting up,
+on Google App Engine. It has minimal, but all necessary tools for setting up,
 developing, testing, configuring, deploying, managining, and supporting a
 typical Python App Engine application. It also shows how to develop responsive
 web app in JavaScript and connect it to an REST-style API server.
+
+## Live Demo
+
+Access:
+* https://psimakov-pwa.appspot.com/
 
 ## Running Locally
 
