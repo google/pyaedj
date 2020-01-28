@@ -4,12 +4,11 @@
 
 ## Goals
 
-py-ae-dj is an experimental project helping developers use Python and Django
+py-ae-dj is an experimental project helping developers use Python and Datastore
 on Google App Engine. It has minimal, but all nessesary tools for setting up,
 developing, testing, configuring, deploying, managining, and supporting a
-typical Python App Engine application. It also shows how to develop Django
-application with Google Cloud SQL, Google Cloud Datastore and other Google
-Cloud APIs.
+typical Python App Engine application. It also shows how to develop responsive
+web app in JavaScript and connect it to an REST-style API server.
 
 ## Running Locally
 

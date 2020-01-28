@@ -1,6 +1,6 @@
 # py-ae-dj
 
-## Python 2.7 server with server-side template rendering
+## Python 2.7 server with Django and server-side template rendering
 
 ## Goals
 
