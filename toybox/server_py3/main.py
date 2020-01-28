@@ -99,6 +99,13 @@ OAUTH_UID_NS = '2'
 API_RESPONSE_PREFIX = ')]}\'\n'
 API_RESPONSE_CONTENT_TYPE = 'application/json; charset=utf-8'
 
+# allowed static hosting roots
+STATIC_SERVING_ROOTS = set([
+    'img',
+    'css',
+    'js',
+])
+
 # relative path to static assets
 STATIC_DIR = os.path.join(os.path.dirname(__file__), 'static')
 if not os.path.isdir(STATIC_DIR):
@@ -130,13 +137,19 @@ def set_no_cache_headers(headers):
 
 def serve_static_file(filename):
   """Serves static file."""
+  filename = os.path.normpath(filename)
+  root = filename.split('/')[0]
+  if root not in STATIC_SERVING_ROOTS:
+    flask.abort(404)
+
   filename = os.path.join(STATIC_DIR, filename)
   mime = mimetypes.guess_type(filename)[0]
   if not mime:
     mime = 'text/plain'
+
   if not os.path.isfile(filename):
     flask.abort(404)
-  with open(filename, 'r') as data:
+  with open(filename, 'rb') as data:
     return flask.Response(data.read(), 200, mimetype=mime)
 
 
