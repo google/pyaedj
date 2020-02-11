@@ -1,4 +1,4 @@
-Django==1.11.7
+Django==1.11.28
 Flask==0.12.2
 google-api-python-client==1.4.0
 pyaml==17.8.0
