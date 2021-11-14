@@ -1,6 +1,4 @@
 firebase_admin
 flask
-google-cloud-datastore==1.8.0
-google-python-cloud-debugger
 pytz
 webtest

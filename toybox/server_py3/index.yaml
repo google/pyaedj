@@ -1,0 +1,14 @@
+indexes:
+
+- kind: Posts
+  properties:
+  - name: is_deleted
+  - name: votes_total
+    direction: desc
+
+- kind: Votes
+  properties:
+  - name: member_uid
+  - name: created_on
+    direction: desc
+

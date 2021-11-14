@@ -15,6 +15,9 @@ import flask
 from werkzeug.exceptions import HTTPException
 import dao
 
+# configure logging
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
 
 # here we define user roles; roles are additive bundles of priveleges
 ROLE_USER = 'user'              # id_token verified; whitelist rules passed
@@ -130,8 +133,17 @@ def set_no_cache_headers(headers):
 
 def serve_static_file(filename):
   """Serves static file."""
-  filename = os.path.normpath(filename)
-  filename = os.path.join(STATIC_DIR, filename)
+
+  # Remove drive letter (if we are on Windows).
+  filename = os.path.abspath(filename)
+  filename = os.path.join(os.sep, filename)
+  unused_drive, path_no_drive = os.path.splitdrive(filename)
+
+  # Remove leading path separator.
+  relfilename = path_no_drive[1:]
+  filename = os.path.join(STATIC_DIR, relfilename)
+  logging.info("Serving static file: %s" % filename)
+
   if not os.path.isfile(filename):
     flask.abort(404)
 

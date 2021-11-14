@@ -21,13 +21,13 @@ readonly USE_JS_SOURCE_MAPS="TRUE"
 
 # define location for build and test
 MANAGE_HOME=~/toybox/manage
+mkdir -p "$MANAGE_HOME"
 LOG="$MANAGE_HOME/log.txt"
 echo "New log started" > "$LOG"
 
 
-# Python 3 build virtual env home
-PY3_ENV_HOME="$MANAGE_HOME/py3/venv"
-PY_BIN="$MANAGE_HOME/py3/venv/bin/python"
+# Python 3
+PY_BIN="python3"
 
 # JavaScript build home
 JS_ENV_HOME="$MANAGE_HOME/js"
@@ -39,16 +39,10 @@ APP_DIR="$MANAGE_HOME/app"
 
 # build and test Python 3
 function build_and_test_py3 {
-  rm -rf "$PY3_ENV_HOME"
-  mkdir -p "$PY3_ENV_HOME"
+  echo "Running pip3 install"
+  pip3 install -r "./server_py3/requirements.txt" &>> "$LOG"
 
-  echo "Building Python 3 environment at $PY3_ENV_HOME"
-  python3 -m venv "$PY3_ENV_HOME"
-  . "$PY3_ENV_HOME/bin/activate"
-  echo "Running pip install"
-  pip install -r ./server_py3/requirements.txt &>> "$LOG"
-
-  echo "Copying Python sourcers into $PY3_ENV_HOME/server"
+  echo "Copying Python 3 sourcers into $APP_DIR/server"
   cp -r "./server_py3/" "$APP_DIR/" &>> "$LOG"
 
   echo "Running Python 3 tests"
@@ -73,7 +67,7 @@ function build_and_test_js {
   unzip -d "$JS_ENV_HOME" "$JS_ENV_HOME/compiler.zip" &>> "$LOG"
 
   echo "Compiling JavaScript into $JS_BUNDLE"
-  java -jar ~/closure-compiler-v20191027.jar \
+  java -jar "$JS_ENV_HOME"/closure-compiler-v20191027.jar \
     --js_output_file="$JS_BUNDLE" \
     --externs "$JS_ENV_HOME/externs/jquery.js" \
     --externs client_js/js/firebase_auth_externs.js \
